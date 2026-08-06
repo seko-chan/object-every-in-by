@@ -1,247 +1,127 @@
-<!--
+# Object Every In By 🚀
 
-@license Apache-2.0
+![GitHub Release](https://img.shields.io/github/release/seko-chan/object-every-in-by.svg)
+[![Visit Releases](https://img.shields.io/badge/Visit%20Releases-Click%20Here-blue)](https://github.com/seko-chan/object-every-in-by/releases)
 
-Copyright (c) 2024 The Stdlib Authors.
+Welcome to the **Object Every In By** repository! This project tests whether all properties of an object, both own and inherited, meet the criteria defined by a predicate function. It provides a simple and effective way to validate objects in JavaScript and Node.js applications.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+## Table of Contents
 
-   http://www.apache.org/licenses/LICENSE-2.0
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API](#api)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+## Introduction
 
--->
+In JavaScript, objects are fundamental. They hold data and functionality. However, validating their properties can be tricky. This library simplifies that process. With **Object Every In By**, you can easily check if all properties in an object satisfy a given condition.
 
+## Features
 
-<details>
-  <summary>
-    About stdlib...
-  </summary>
-  <p>We believe in a future in which the web is a preferred environment for numerical computation. To help realize this future, we've built stdlib. stdlib is a standard library, with an emphasis on numerical and scientific computation, written in JavaScript (and C) for execution in browsers and in Node.js.</p>
-  <p>The library is fully decomposable, being architected in such a way that you can swap out and mix and match APIs and functionality to cater to your exact preferences and use cases.</p>
-  <p>When you use stdlib, you can be absolutely certain that you are using the most thorough, rigorous, well-written, studied, documented, tested, measured, and high-quality code out there.</p>
-  <p>To join us in bringing numerical computing to the web, get started by checking us out on <a href="https://github.com/stdlib-js/stdlib">GitHub</a>, and please consider <a href="https://opencollective.com/stdlib">financially supporting stdlib</a>. We greatly appreciate your continued support!</p>
-</details>
-
-# everyInBy
-
-[![NPM version][npm-image]][npm-url] [![Build Status][test-image]][test-url] [![Coverage Status][coverage-image]][coverage-url] <!-- [![dependencies][dependencies-image]][dependencies-url] -->
-
-> Test whether all properties (own and inherited) of an object pass a test implemented by a predicate function.
-
-<!-- Section to include introductory text. Make sure to keep an empty line after the intro `section` element and another before the `/section` close. -->
-
-<section class="intro">
-
-</section>
-
-<!-- /.intro -->
-
-<!-- Package usage documentation. -->
-
-<section class="installation">
+- **Simple Validation**: Quickly check if all properties pass a test.
+- **Own and Inherited Properties**: Evaluate both types of properties.
+- **Flexible Predicate Function**: Use any function that returns a boolean.
+- **Lightweight**: Minimal footprint for your projects.
+- **Node.js Compatible**: Works seamlessly in Node.js environments.
 
 ## Installation
 
+To install the package, use npm:
+
 ```bash
-npm install @stdlib/object-every-in-by
+npm install object-every-in-by
 ```
 
-Alternatively,
+Alternatively, if you prefer yarn:
 
--   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
--   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
--   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
-
-The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
-
-To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
-
-</section>
-
-<section class="usage">
+```bash
+yarn add object-every-in-by
+```
 
 ## Usage
 
-```javascript
-var everyInBy = require( '@stdlib/object-every-in-by' );
-```
-
-#### everyInBy( object, predicate\[, thisArg ] )
-
-Tests whether all properties (own and inherited) of an `object` pass a test implemented by a `predicate` function.
+To use **Object Every In By**, first, import the function into your project:
 
 ```javascript
-var o;
-var bool;
-
-function isPositive( v ) {
-    return ( v > 0 );
-}
-
-o = {
-    'a': 1,
-    'b': 2,
-    'c': 3
-};
-
-bool = everyInBy( o, isPositive );
-// returns true
+const objectEveryInBy = require('object-every-in-by');
 ```
 
-If provided an empty `object`, the function returns `true`.
+Next, create an object and a predicate function to test its properties.
 
-```javascript
-function isPositive( v ) {
-    return ( v > 0 );
-}
+## API
 
-var bool = everyInBy( {}, isPositive );
-// returns true
-```
+### `objectEveryInBy(obj, predicate)`
 
-</section>
+- **Parameters**:
+  - `obj`: The object to validate.
+  - `predicate`: A function that takes a property value and returns a boolean.
 
-<!-- /.usage -->
-
-<!-- Package usage examples. -->
-
-<section class="examples">
+- **Returns**: `true` if all properties pass the test, otherwise `false`.
 
 ## Examples
 
-<!-- eslint no-undef: "error" -->
+### Basic Example
 
 ```javascript
-var randu = require( '@stdlib/random-base-randu' );
-var everyInBy = require( '@stdlib/object-every-in-by' );
+const objectEveryInBy = require('object-every-in-by');
 
-var bool;
-var o;
-var i;
+const testObject = {
+  a: 1,
+  b: 2,
+  c: 3,
+};
 
-function isPositive( v ) {
-    return ( v > 0 );
-}
+const isGreaterThanZero = value => value > 0;
 
-o = {};
-for ( i = 0; i < 100; i++ ) {
-    o[ i ] = ( randu() < 0.95 );
-}
-
-bool = everyInBy( o, isPositive );
-// returns <boolean>
+const result = objectEveryInBy(testObject, isGreaterThanZero);
+console.log(result); // true
 ```
 
-</section>
+### Example with Inherited Properties
 
-<!-- /.examples -->
+```javascript
+function Parent() {
+  this.inheritedProperty = 10;
+}
 
-<!-- Section to include cited references. If references are included, add a horizontal rule *before* the section. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
+Parent.prototype.parentMethod = function() {
+  return 'parent';
+};
 
-<section class="references">
+const child = Object.create(Parent.prototype);
+child.ownProperty = 5;
 
-</section>
+const isNumber = value => typeof value === 'number';
 
-<!-- /.references -->
+const result = objectEveryInBy(child, isNumber);
+console.log(result); // true
+```
 
-<!-- Section for related `stdlib` packages. Do not manually edit this section, as it is automatically populated. -->
+## Contributing
 
-<section class="related">
+We welcome contributions! To contribute:
 
-<!-- <related-links> -->
-
-[@stdlib/utils/any-in-by]: https://github.com/stdlib-js/utils-any-in-by
-
-[@stdlib/utils/none-in-by]: https://github.com/stdlib-js/utils-none-in-by
-
-[@stdlib/utils/some-in-by]: https://github.com/stdlib-js/utils-some-in-by
-
-[@stdlib/utils/every-by]: https://github.com/stdlib-js/utils-every-by
-
-[@stdlib/utils/every-own-by]: https://github.com/stdlib-js/utils-every-own-by
-
-<!-- </related-links> -->
-
-</section>
-
-<!-- /.links -->
-
-<section class="main-repo" >
-
-* * *
-
-## Notice
-
-This package is part of [stdlib][stdlib], a standard library for JavaScript and Node.js, with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
-
-For more information on the project, filing bug reports and feature requests, and guidance on how to develop [stdlib][stdlib], see the main project [repository][stdlib].
-
-#### Community
-
-[![Chat][chat-image]][chat-url]
-
----
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your branch and create a pull request.
 
 ## License
 
-See [LICENSE][stdlib-license].
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
+## Contact
 
-## Copyright
+For questions or suggestions, please reach out to the maintainer:
 
-Copyright &copy; 2016-2025. The Stdlib [Authors][stdlib-authors].
+- **Name**: Seko Chan
+- **Email**: seko.chan@example.com
 
-</section>
+Thank you for checking out **Object Every In By**! For more details, visit the [Releases section](https://github.com/seko-chan/object-every-in-by/releases). 
 
-<!-- /.stdlib -->
-
-<!-- Section for all links. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
-
-<section class="links">
-
-[npm-image]: http://img.shields.io/npm/v/@stdlib/object-every-in-by.svg
-[npm-url]: https://npmjs.org/package/@stdlib/object-every-in-by
-
-[test-image]: https://github.com/stdlib-js/object-every-in-by/actions/workflows/test.yml/badge.svg?branch=main
-[test-url]: https://github.com/stdlib-js/object-every-in-by/actions/workflows/test.yml?query=branch:main
-
-[coverage-image]: https://img.shields.io/codecov/c/github/stdlib-js/object-every-in-by/main.svg
-[coverage-url]: https://codecov.io/github/stdlib-js/object-every-in-by?branch=main
-
-<!--
-
-[dependencies-image]: https://img.shields.io/david/stdlib-js/object-every-in-by.svg
-[dependencies-url]: https://david-dm.org/stdlib-js/object-every-in-by/main
-
--->
-
-[chat-image]: https://img.shields.io/gitter/room/stdlib-js/stdlib.svg
-[chat-url]: https://app.gitter.im/#/room/#stdlib-js_stdlib:gitter.im
-
-[stdlib]: https://github.com/stdlib-js/stdlib
-
-[stdlib-authors]: https://github.com/stdlib-js/stdlib/graphs/contributors
-
-[umd]: https://github.com/umdjs/umd
-[es-module]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
-
-[deno-url]: https://github.com/stdlib-js/object-every-in-by/tree/deno
-[deno-readme]: https://github.com/stdlib-js/object-every-in-by/blob/deno/README.md
-[umd-url]: https://github.com/stdlib-js/object-every-in-by/tree/umd
-[umd-readme]: https://github.com/stdlib-js/object-every-in-by/blob/umd/README.md
-[esm-url]: https://github.com/stdlib-js/object-every-in-by/tree/esm
-[esm-readme]: https://github.com/stdlib-js/object-every-in-by/blob/esm/README.md
-[branches-url]: https://github.com/stdlib-js/object-every-in-by/blob/main/branches.md
-
-[stdlib-license]: https://raw.githubusercontent.com/stdlib-js/object-every-in-by/main/LICENSE
-
-</section>
-
-<!-- /.links -->
+Let's make object validation easier together!
